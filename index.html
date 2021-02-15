@@ -10,28 +10,21 @@
 </head>
 <body>
 
-	<p class="before-script">...content before script...</p>
+	<p>...content before scripts...</p>
 
 	<script>
-		alert('prima di DOMContentLoaded, .before-script: ' +  document.querySelector('.before-script').textContent);
-		alert('prima di DOMContentLoaded, .after-script: ' + document.querySelector('.after-script'));
+		document.addEventListener('DOMContentLoaded', () => alert("DOM ready!"));
 	</script>
-
-	<script>
-		document.addEventListener('DOMContentLoaded', () => {
-			alert("DOM ready after defer! " + document.querySelector('.after-script').textContent);
-		});
-	</script>
-
 
 	<!--
-		DEFER = ehi browser, don't stop page parsing (don't wait for me to finish loading)
-		BUT DOMContentLoaded, before you get triggered, you MUST wait for me.
-	-->
-	<script defer src="https://javascript.info/article/script-async-defer/long.js?speed=1"></script>
+		ASYNC = ehi browser don't wait for me
+		AND DOMContentLoaded you don't have to wait for me.
+		I don't the order of scripts declaration: the last script tag parsed can be available before the first.
+	 -->
+	<script async src="https://javascript.info/article/script-async-defer/long.js"></script>
+	<script async src="https://javascript.info/article/script-async-defer/small.js"></script>
 
-	<!-- This isn't visible until the script loads -->
-	<p class="after-script">...content after script...</p>
+	<p>...content after scripts...</p>
 
 </body>
 </html>
