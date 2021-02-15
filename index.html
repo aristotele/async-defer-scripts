@@ -12,8 +12,23 @@
 
 	<p class="before-script">...content before script...</p>
 
+	<script>
+		alert('prima di DOMContentLoaded, .before-script: ' +  document.querySelector('.before-script').textContent);
+		alert('prima di DOMContentLoaded, .after-script: ' + document.querySelector('.after-script'));
+	</script>
 
-	<script src="https://javascript.info/article/script-async-defer/long.js?speed=1"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			alert("DOM ready after defer! " + document.querySelector('.after-script').textContent);
+		});
+	</script>
+
+
+	<!--
+		DEFER = ehi browser, don't stop page parsing (don't wait for me to finish loading)
+		BUT DOMContentLoaded, before you get triggered, you MUST wait for me.
+	-->
+	<script defer src="https://javascript.info/article/script-async-defer/long.js?speed=1"></script>
 
 	<!-- This isn't visible until the script loads -->
 	<p class="after-script">...content after script...</p>
